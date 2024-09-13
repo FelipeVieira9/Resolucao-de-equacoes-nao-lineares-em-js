@@ -1,0 +1,15 @@
+{
+  "name": "trabalho-de-calculo-numerico",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felipe Vieira felipe.vieiraa52@gmail.com https://github.com/FelipeVieira9/Trabalho-de-Calculo-Numerico",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "math-expression-evaluator": "^2.0.5"
+  }
+}
