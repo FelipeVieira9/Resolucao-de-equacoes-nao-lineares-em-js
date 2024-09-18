@@ -16,7 +16,7 @@
             <span>
                 <label for="methods_select">Método:</label>
                 <select id="methods_select">
-                    <option value="" selected>(Selecione um)</option>
+                    <option value="noSelected" selected>(Selecione um)</option>
                     <option value="Binomial">Binomial</option>
                     <option value="FalsaPos">Falsa Posição</option>
                     <option value="PontoFix">Ponto Fixo</option>
@@ -28,6 +28,7 @@
             
 
             <div id="method_options">
+                <div id="noAllowed"></div>
                 <!-- Mostrar todas as opções disponíveis, mas sem poder selecionar nem nada -->
                 <!-- Mudar no js sempre que a opção mudar pra mostrar as opções disponíveis -->
                 <span> 
@@ -51,28 +52,39 @@
                 </span>
 
                 <span>
-                    <label for="input_interac">Numero máximo de iterações: </label>
+                    <label for="input_interac">Iterações MAX: </label>
                     <input type="number" id="input_interac">
                 </span>
 
-                <input type="button" id="input_calculate" value="Calcular">
+                <input type="button" id="input_calculate" value="Calcular" class="btn">
             </div>
         </div>
 
         <div id="container_result">
             <div id="container_iterations">
-                <div id="iterations_header">Função: ? || Intervalo: ? || Tolerancia: ?</div>
+                <div id="iterations_header">
+                    <span>Iteração</span>
+                    <span>x</span>
+                    <span>f(x)</span>
+                    <span>|x(i) - x(i - 1)|</span>
+                </div>
 
                 <span>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
-                    <div class="iterations">ITERAÇÃO ?: f(x) = "2x + 3" | a = 1, b = 2 | f(a) - f(b) = ?</div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
+                    <div class="iterations"><span>x?</span> <span>10</span> <span>34</span> <span>0.03</span></div>
                 </span>
             </div>
 
