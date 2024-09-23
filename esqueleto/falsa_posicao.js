@@ -63,4 +63,4 @@ function falsa_posicao(expressao, inicio_interv, fim_interv, tolerancia, limite_
 }
 
 // teste da função
-console.log(falsa_posicao("x^3 - x - 1", 1, 2, 0.002))
+console.log(falsa_posicao("x^3 - x - 1", 1, 2, 0.002, 50))

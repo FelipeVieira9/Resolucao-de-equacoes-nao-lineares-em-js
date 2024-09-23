@@ -61,4 +61,4 @@ function bissecao(expressao, inicio_interv, fim_interv, tolerancia, limite_itera
 }
 
 // teste da função
-console.log(bissecao("x^3 - x - 1", 1, 2, 0.002))
+console.log(bissecao("x^3 - x - 1", 1, 2, 0.002, 50))
