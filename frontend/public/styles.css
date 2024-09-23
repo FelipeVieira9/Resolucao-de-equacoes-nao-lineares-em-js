@@ -84,7 +84,7 @@ main {
     margin-top: 10px;
     width: 100%;
     /* min-height: 20%; */
-    display: flex;
+    display: none;
 }
 
 #container_iterations {
@@ -93,6 +93,7 @@ main {
     /* border: 1px solid black; */
     overflow-y: auto;
     position: relative;
+    display: none;
 }
 
 #container_graphic {
