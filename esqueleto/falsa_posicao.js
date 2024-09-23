@@ -5,9 +5,9 @@
 
 //////////////////////////////////////////
 
-function falsa_posicao(expressao, inicio_interv, fim_interv, tolerancia){
+function falsa_posicao(expressao, inicio_interv, fim_interv, tolerancia, limite_iteracoes){
     const exp_p = math.parse(expressao)
-    const exp_c = exp_p.compile() 
+    const exp_c = exp_p.compile()
     // definindo o intervalo [a, b]
         var a = inicio_interv
         var b = fim_interv
@@ -16,7 +16,6 @@ function falsa_posicao(expressao, inicio_interv, fim_interv, tolerancia){
         var f_a = exp_c.evaluate({x: a}) // f(a)
         var f_b = exp_c.evaluate({x: b}) // f(b)
     
-
     // condição para uso do método
         if(f_a*f_b >= 0){
             if(math.abs(f_a) < tolerancia) return a
@@ -27,15 +26,16 @@ function falsa_posicao(expressao, inicio_interv, fim_interv, tolerancia){
         }
 
 // falta a restrição da derivada ter um sinal constante...
+
     // valor de x e f(x)
         var x = (a*f_b - b*f_a)/(f_b - f_a)
         var f_x = exp_c.evaluate({x: x})
 
-    // k: contador de interações
+    // k: contador de iterações
         var k = 0
     
     // |f(x)| > tolerancia
-        while(math.abs(f_x) > tolerancia){
+        while(math.abs(f_x) > tolerancia && k < limite_iteracoes){
             console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
 
             if((f_a*f_x) < 0){
@@ -50,9 +50,10 @@ function falsa_posicao(expressao, inicio_interv, fim_interv, tolerancia){
             
             // novo valor de x
                 x = (a*f_b - b*f_a)/(f_b - f_a)
-            // calculando novamente f_x
+            // calculando novamente f(x)
                 f_x = exp_c.evaluate({x: x})
-            // contador de interações
+
+            // contador de iterações
                 k++
         }
 

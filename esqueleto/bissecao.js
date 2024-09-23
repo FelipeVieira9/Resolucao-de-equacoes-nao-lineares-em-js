@@ -5,7 +5,7 @@
 
 //////////////////////////////////////////
 
-function bissecao(expressao, inicio_interv, fim_interv, tolerancia){
+function bissecao(expressao, inicio_interv, fim_interv, tolerancia, limite_iteracoes){
     const exp_p = math.parse(expressao)
     const exp_c = exp_p.compile() 
     // definindo o intervalo [a, b]
@@ -29,11 +29,11 @@ function bissecao(expressao, inicio_interv, fim_interv, tolerancia){
     // f(x)
         var f_x = exp_c.evaluate({x: x})
 
-    // k: contador de interações
+    // k: contador de iterações
         var k = 0
     
     // |f(x)| > tolerancia
-        while(math.abs(f_x) > tolerancia){
+        while(math.abs(f_x) > tolerancia && k < limite_iteracoes){
             console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
 
             if((f_a*f_x) < 0){
@@ -51,7 +51,7 @@ function bissecao(expressao, inicio_interv, fim_interv, tolerancia){
             // calculando novamente f(x)
                 f_x = exp_c.evaluate({x: x})
 
-            // contagem de interações
+            // contagem de iterações
                 k++
         }
 
