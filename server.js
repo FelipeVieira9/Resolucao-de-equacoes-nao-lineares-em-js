@@ -128,7 +128,7 @@ app.post('/', (req, res) => {
 
     try {
         switch (estrutura.tipo) {
-        case 'Binomial':
+        case 'Bissecao':
             res.status(200).json({x: metodo.bissecao()});
             break;
         }
@@ -139,28 +139,7 @@ app.post('/', (req, res) => {
         res.status(400);
         console.log(error);
     }
-    
-    // try {
-    //     if (/(x)/.test(estrutura)) {
-    //         result = estrutura;
-    //         res.status(200).json({result: result});
-    //         console.log(`Servidor retornou: ${result}`);
-
-    //     } else {
-    //         result = estrutura; // mexp.eval(textFunc)
-    //         res.status(200).json({result: result});
-    //         console.log(`Servidor retornou: ${result}`);
-    //     }
-
-    // } catch (error) {
-    //     res.status(400).json({result: "Sintaxe incorreta!"});
-    //     console.log(`Sintaxe incorreta!`);
-    // }
 })
-
-
-
-// app.post() -> Handle post requisitions
 
 app.use('/assets', express.static(__dirname + "/frontend/public"));
 

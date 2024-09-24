@@ -59,7 +59,7 @@ const postEstrutura = async (obj) => {
       // }
 
       switch (globalOption) {
-        case 'Binomial': 
+        case 'Bissecao': 
         if (data.x === 'err') {
           document.querySelector('#container_iterations > span').innerHTML = '';
           document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
@@ -88,28 +88,30 @@ const postEstrutura = async (obj) => {
 //
 methods_select.addEventListener('change', (e) => {
   switch (e.target.value) {
-    case 'Binomial':
+    case 'Bissecao':
       document.getElementById('noAllowed').style.display = 'none';
-      // document.getElementById('input_deriv').parentNode.style.display = 'none';
       document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
-      globalOption = 'Binomial';
+      globalOption = 'Bissecao';
       break;
 
     default:
-      // const nodeElements = document.getElementById('method_options').children;
-      // for (let x = 0; x < 5; x++) {
-
-      //   nodeElements[x].style.display = 'inline-block';
-      //   console.log(`Node ${x+1} sucesso`)
-      // }
-
       document.getElementById('input_deriv').setAttribute('placeholder', '');
       document.getElementById('noAllowed').style.display = 'block';
   }
 })
 
+// const regexLnBack = //; // Fazer função ln()
+// const regexLogBack = //;
+
+const regexLnGraf = /(ln)/g;
+const regexLogGraf = /(log)/g;
+
+
+
 input_calculate.addEventListener('click', () => {
   document.querySelector('#container_iterations > span').innerHTML = '';
+
+
 
   const estrutura = {
     tipo: methods_select.value,
@@ -123,12 +125,19 @@ input_calculate.addEventListener('click', () => {
   }
   // Enviar os dado para o backend e receber um array da interação
   postEstrutura(estrutura);
-  drawGraphic();
-
-  // Caso a requesição seja ok
-  // Mostrar tabela iteração
+  
   document.getElementById('container_iterations').style.display = 'block';
   document.getElementById('container_result').style.display = 'flex';
+  
+  if (regexLnGraf.test(input_func.value)) { // log(x)
+      input_func.value = input_func.value.replace(regexLnGraf, 'log')
+  }
+
+  if (regexLogGraf.test(input_func.value)) { // log(x)
+      input_func.value = input_func.value.replace(regexLogGraf, 'log10');
+  }
+
+  drawGraphic();// arumar grafico
 
   // Limpar elementos options
   const nodeSpan = document.querySelectorAll('#method_options span');
