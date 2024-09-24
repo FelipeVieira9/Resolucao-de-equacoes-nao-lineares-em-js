@@ -7,6 +7,8 @@ const input_interac = document.getElementById('input_interac');
 const methods_select = document.getElementById('methods_select');
 const input_calculate = document.getElementById('input_calculate');
 
+let globalOption;
+
 // Function to draw the graph
 const drawGraphic = () => {
     let width = document.getElementById('container_graphic').clientWidth;
@@ -23,7 +25,7 @@ const drawGraphic = () => {
           {
             fn: input_func.value,
             derivative: {
-              fn: input_deriv.value,
+              fn: input_deriv.value.length === 0 ? '0': input_deriv.value,
               updateOnMouseMove: true
             }
           }
@@ -49,8 +51,37 @@ const postEstrutura = async (obj) => {
       console.log('Requisição bem-sucedida');
       const data = await res.json();
       console.log(data.x);
+      // {
+      //   iterac: k,
+      //   x: x,
+      //   fx: f_x,
+      //   mod: b - a
+      // }
 
+      switch (globalOption) {
+        case 'Binomial': 
+        if (data.x === 'err') {
+          document.querySelector('#container_iterations > span').innerHTML = '';
+          document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
+        } else if (data.x === 'inf') {
+          document.querySelector('#container_iterations > span').innerHTML = '';
+          document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!, INFINITO</div>`);
+        } else {
+          data.x.forEach(({iterac, x, fx, mod}) => {
+            let HTML = `<div class="iterations"><span>x${iterac}</span> <span>${Number(x).toFixed(8)}</span> <span>${Number(fx).toFixed(8)}</span> <span>${Number(mod).toFixed(8)}</span></div>`;
+  
+            document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', HTML);
+          }) 
+  
+        }
+          break;
+      }
   } catch (error) {
+      document.getElementById('container_iterations').style.display = 'block';
+      document.getElementById('container_result').style.display = 'flex';
+      document.querySelector('#container_iterations > span').innerHTML = '';
+      document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
+
       console.log("Error na requisição:" + error);
   }
 }
@@ -61,6 +92,7 @@ methods_select.addEventListener('change', (e) => {
       document.getElementById('noAllowed').style.display = 'none';
       // document.getElementById('input_deriv').parentNode.style.display = 'none';
       document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
+      globalOption = 'Binomial';
       break;
 
     default:
@@ -77,6 +109,8 @@ methods_select.addEventListener('change', (e) => {
 })
 
 input_calculate.addEventListener('click', () => {
+  document.querySelector('#container_iterations > span').innerHTML = '';
+
   const estrutura = {
     tipo: methods_select.value,
     opcoes: {
@@ -89,14 +123,12 @@ input_calculate.addEventListener('click', () => {
   }
   // Enviar os dado para o backend e receber um array da interação
   postEstrutura(estrutura);
+  drawGraphic();
 
   // Caso a requesição seja ok
   // Mostrar tabela iteração
   document.getElementById('container_iterations').style.display = 'block';
   document.getElementById('container_result').style.display = 'flex';
-
-  // Tentar gerar o gráfico
-  drawGraphic();
 
   // Limpar elementos options
   const nodeSpan = document.querySelectorAll('#method_options span');
@@ -104,8 +136,8 @@ input_calculate.addEventListener('click', () => {
   Array.from(nodeSpan).forEach((nodes) => nodes.children[1].value = '');
   document.getElementById('noAllowed').style.display = 'block';
 
-  // -> enviar iterações
-
-  // Verificar se grafico funciona
-  // -> enviar grafico
+  Array.from(methods_select.children).forEach((node) => {
+    node.removeAttribute('selected')
+  })
+  methods_select.children[0].setAttribute('selected' ,true);
 })
