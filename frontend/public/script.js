@@ -14,11 +14,11 @@ const input_calculate = document.getElementById('input_calculate');
 let globalOption = '';
 
 // A FAZER
-// const regexLnBack = //; // Fazer função ln()
-// const regexLogBack = //;
+const regexLnBack = /(ln)/gi; // Fazer função ln()
+const regexLogBack = /log\(([^)]+)\)/ig;
 
-const regexLnGraf = /(ln)/g;
-const regexLogGraf = /(log)/g;
+const regexLnGraf = /(ln)/gi;
+const regexLogGraf = /(log)/gi;
 
 // Selecionar o método
 methods_select.addEventListener('change', (e) => {
@@ -38,11 +38,32 @@ methods_select.addEventListener('change', (e) => {
 // Calcular o método escolhido
 input_calculate.addEventListener('click', () => {
   document.querySelector('#container_iterations > span').innerHTML = '';
+  let valueCloneBack = input_func.value;
+  let valueCloneGraf = input_func.value;
+
+  if (regexLnBack.test(valueCloneBack)) {
+    console.log("entrou")
+    valueCloneBack = valueCloneBack.replace(regexLnBack, 'log')
+  } else if (regexLogBack.test(valueCloneBack)) { // Tive q usar gpt pq pelo amor de deus
+      valueCloneBack = valueCloneBack.replace(regexLogBack, function(match, p1) {
+      console.log(p1)
+      console.log(match)
+      return `log(${p1}, 10)`;
+    });
+
+    // while (regexLogBack.test(valueCloneBack)) {
+    //   valueCloneBack = valueCloneBack.replace(regexLogBack, function(match, p1) {
+    //     console.log(p1)
+    //     console.log(match)
+    //     return `log(${p1}, 10)`;
+    //   });
+    // }
+  }
 
   const estrutura = {
     tipo: methods_select.value,
     opcoes: {
-      funcao: input_func.value,
+      funcao: valueCloneBack,
       derivada: input_deriv.value,
       intervalo: input_interval.value.replace(/(\[)|(\])/g, '').split(/(,)/),
       tolerancia: input_toler.value,
@@ -58,12 +79,12 @@ input_calculate.addEventListener('click', () => {
   document.getElementById('container_result').style.display = 'flex';
   
   // Limpar as entradas para o gráfico
-  if (regexLnGraf.test(input_func.value)) { // log(x)
-      input_func.value = input_func.value.replace(regexLnGraf, 'log')
+  if (regexLnGraf.test(valueCloneGraf)) { // log(x)
+      valueCloneGraf = valueCloneGraf.replace(regexLnGraf, 'log')
   }
 
-  if (regexLogGraf.test(input_func.value)) { // log(x)
-      input_func.value = input_func.value.replace(regexLogGraf, 'log10');
+  if (regexLogGraf.test(valueCloneGraf)) { // log(x)
+      valueCloneGraf = valueCloneGraf.replace(regexLogGraf, 'log10');
   }
 
   // Enviar gráfico
