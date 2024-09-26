@@ -2,6 +2,8 @@ const { create, all } = require('mathjs');
 const config = { };
 const math = create(all, config);
 
+const formStrMath = require('../../backend/formStrMath.js')
+
 class Metodo {
     constructor(estrutura) {
         this.estrutura = estrutura;
@@ -16,10 +18,11 @@ class Metodo {
             // }
         ];
 
-        const {funcao: expressao, intervalo, tolerancia, iteracoesM: limite_iteracoes} = this.estrutura.opcoes;
+        const {funcao: auxExpressao, intervalo, tolerancia, iteracoesM: limite_iteracoes} = this.estrutura.opcoes;
         const inicio_interv = Number(intervalo[0]);
         const fim_interv = Number(intervalo[2]);
         
+        const expressao = formStrMath(auxExpressao)
         const exp_p = math.parse(expressao)
         const exp_c = exp_p.compile() 
     // definindo o intervalo [a, b]
