@@ -57,7 +57,7 @@ class Metodo {
     
     // |f(x)| > tolerancia
         while(math.abs(f_x) > tolerancia && k < limite_iteracoes){
-            console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
+            // console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
 
             if((f_a*f_x) < 0){
                 // novo intervalo [a, x]
@@ -87,7 +87,7 @@ class Metodo {
                         mod: b - a
                 })
         }
-        console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
+        // console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
         
         // resultado final
         let str = '';
