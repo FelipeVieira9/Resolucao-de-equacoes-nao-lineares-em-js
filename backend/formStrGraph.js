@@ -1,4 +1,4 @@
-export function formStrGraph(func){ 
+function formStrGraph(func){ 
     var newStr = func
     
     // exp = expressão
@@ -51,5 +51,7 @@ export function formStrGraph(func){
 
         return newStr
 }
+
+module.exports = formStrGraph
 
 // console.log(formStrGraph("log5(x^2) + 15 + log12(x) + ln(x)"))
