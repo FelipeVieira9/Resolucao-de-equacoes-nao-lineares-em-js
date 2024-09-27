@@ -18,6 +18,8 @@ app.post('/', (req, res) => { // Send result of iteration
         case 'Bissecao':
             res.status(200).json({x: metodo.bissecao()});
             break;
+        case 'FalsaPos':
+            res.status(200).json({x: metodo.bissecao()});
         }
 
         console.log(metodo.bissecao());

@@ -22,6 +22,11 @@ methods_select.addEventListener('change', (e) => {
       document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
       globalOption = 'Bissecao';
       break;
+    case 'FalsaPos':
+      document.getElementById('noAllowed').style.display = 'none';
+      document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
+      globalOption = 'FalsaPos';
+      break;
 
     default:
       document.getElementById('input_deriv').setAttribute('placeholder', '');
