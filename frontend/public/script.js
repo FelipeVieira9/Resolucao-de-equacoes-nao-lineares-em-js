@@ -37,32 +37,11 @@ methods_select.addEventListener('change', (e) => {
 // Calcular o método escolhido
 input_calculate.addEventListener('click', () => {
   document.querySelector('#container_iterations > span').innerHTML = '';
-  let valueCloneBack = input_func.value;
-  let valueCloneGraf = input_func.value;
-
-  if (regexLnBack.test(valueCloneBack)) {
-    console.log("entrou")
-    valueCloneBack = valueCloneBack.replace(regexLnBack, 'log')
-  } else if (regexLogBack.test(valueCloneBack)) { // Tive q usar gpt pq pelo amor de deus
-      valueCloneBack = valueCloneBack.replace(regexLogBack, function(match, p1) {
-      console.log(p1)
-      console.log(match)
-      return `log(${p1}, 10)`;
-    });
-
-    // while (regexLogBack.test(valueCloneBack)) {
-    //   valueCloneBack = valueCloneBack.replace(regexLogBack, function(match, p1) {
-    //     console.log(p1)
-    //     console.log(match)
-    //     return `log(${p1}, 10)`;
-    //   });
-    // }
-  }
 
   const estrutura = {
     tipo: methods_select.value,
     opcoes: {
-      funcao: valueCloneBack,
+      funcao: input_func.value,
       derivada: input_deriv.value,
       intervalo: input_interval.value.replace(/(\[)|(\])/g, '').split(/(,)/),
       tolerancia: input_toler.value,
@@ -76,7 +55,7 @@ input_calculate.addEventListener('click', () => {
   // Liberar a visualização
   document.getElementById('container_iterations').style.display = 'block';
   document.getElementById('container_result').style.display = 'flex';
-  
+
   // Enviar gráfico
   try {
     drawGraphic();
