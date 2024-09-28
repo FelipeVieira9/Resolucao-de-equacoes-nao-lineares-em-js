@@ -150,7 +150,25 @@ export const postEstrutura = async (obj, globalOption) => {
                   document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', HTML);
                 }) 
               }
-              break
+              break;
+
+              case 'Secante':
+              document.getElementById('tipo_metodo').textContent = "Secante - Iteração";
+              if (data.x === 'err') {
+                document.querySelector('#container_iterations > span').innerHTML = '';
+                document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
+              } else if (data.x === 'inf') {
+                document.querySelector('#container_iterations > span').innerHTML = '';
+                document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!, INFINITO</div>`);
+              } else {
+                // console.log(data.x);
+                data.x.forEach(({iterac, x, fx, mod}) => {
+                  let HTML = `<div class="iterations"><span>x${iterac}</span> <span>${Number(x).toFixed(8)}</span> <span>${Number(fx).toFixed(8)}</span> <span>${Number(mod).toFixed(8)}</span></div>`;
+                  
+                  document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', HTML);
+                }) 
+              }
+              break;
         }
         console.log('Nodes enviados, função terminou');
     } catch (error) {

@@ -24,6 +24,9 @@ app.post('/', (req, res) => { // Send result of iteration
         case 'NewtonRaph':
             res.status(200).json({x: metodo.Newton_Raphson()});
             break;
+        case 'Secante':
+            res.status(200).json({x: metodo.Secante()})
+            break;
         }
         // console.log(metodo.bissecao());
 

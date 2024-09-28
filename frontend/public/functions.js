@@ -303,6 +303,91 @@ class Metodo {
             return arr;
         }
     }
+
+    Secante() {
+        const arr = [
+            // {
+            //     x: ?,
+            //     fx: ?,
+            //     mod: ?
+            // }
+        ];
+        
+        const {funcao: auxExpressao, intervalo, tolerancia, iteracoesM: limite_iteracoes} = this.estrutura.opcoes;
+        const inicio_interv = Number(intervalo[0]);
+        const fim_interv = Number(intervalo[2]);
+
+        const func = formStrMath(auxExpressao) // Função formatada, adicionei
+        const A = inicio_interv // inicio do intervalo
+        const B = fim_interv // fim do intervalo
+        const T = tolerancia // tolerância
+        const LdI = limite_iteracoes // limite de iterações
+
+        const f_parse = math.parse(func)
+        const f = f_parse.compile()
+
+        var a = A // anterior-> x(k-1)
+        var x = B // atual-> x(k)
+
+        var fa = f.evaluate({x: a})
+        var fx = f.evaluate({x: x})
+
+        console.log(`k = 0\n\tx0 = ${a}\n\tf(x0) = ${fa}\n\tx1 = ${x}\n\tf(x1) = ${fx}`)
+        // if(fa*fx > 0){
+        //     return 'err' REMOVI PQ TAVA DANDO ERROR LITERALMENTE
+        // }
+
+        var k = 0;
+
+        arr.push(
+            {
+                    iterac: k,
+                    x: x,
+                    fx: fx,
+                    mod: x - a
+            })
+        
+        var aux1, aux2;
+
+        while(math.abs(fx) > T && k < LdI){
+            k++;
+            // auxiliares para atribuir o valor anterior ao fim do loop
+                aux1 = x; aux2 = fx
+            // algoritmo da secante
+                x = (a*fx - x*fa)/(fx - fa)
+                fx = f.evaluate({x: x})
+            // atualizando o valor anterior
+                a = aux1; fa = aux2
+
+                arr.push(
+                    {
+                            iterac: k,
+                            x: x,
+                            fx: fx,
+                            mod: x - a
+                    })
+            // print resultado
+            console.log(`k = ${k}\n\tx${k+1} = ${x}\n\tf(x${k+1}) = ${fx}`)
+        }
+
+        // resultado final
+        let str = '';
+        arr.forEach(({iterac, x, fx, mod}) => {
+            if (str.length > 0) {
+                if (isNaN(iterac) || isNaN(x) || isNaN(fx) || isNaN(mod)) {
+                    return 'err'
+                } else if (!isFinite(fx)) {
+                    return 'inf'
+                }
+            }
+        })
+
+        if (k === limite_iteracoes) {
+            return 'err'
+        } else {
+            return arr;
+        }
+    }
 }
 
 module.exports = { Metodo }

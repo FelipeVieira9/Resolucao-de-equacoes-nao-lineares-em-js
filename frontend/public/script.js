@@ -32,6 +32,11 @@ methods_select.addEventListener('change', (e) => {
       document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
       globalOption = 'NewtonRaph';
       break;
+    case 'Secante':
+      document.getElementById('noAllowed').style.display = 'none';
+      document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
+      globalOption = 'Secante';
+      break;
 
     default:
       document.getElementById('input_deriv').setAttribute('placeholder', '');
