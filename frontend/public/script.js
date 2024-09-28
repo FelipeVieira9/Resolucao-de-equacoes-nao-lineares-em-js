@@ -1,4 +1,5 @@
 import { drawGraphic, postEstrutura } from "/assets/webFunctions.js";
+//import formStrGraph from "../../backend/formStrGraph.js";
 const input_func = document.getElementById('input_func');
 const input_deriv = document.getElementById('input_deriv');
 const input_interval = document.getElementById('input_interval');
@@ -13,13 +14,6 @@ const input_calculate = document.getElementById('input_calculate');
 // Global variables
 let globalOption = '';
 
-// A FAZER
-const regexLnBack = /(ln)/gi; // Fazer função ln()
-const regexLogBack = /log\(([^)]+)\)/ig;
-
-const regexLnGraf = /(ln)/gi;
-const regexLogGraf = /(log)/gi;
-
 // Selecionar o método
 methods_select.addEventListener('change', (e) => {
   switch (e.target.value) {
@@ -27,6 +21,11 @@ methods_select.addEventListener('change', (e) => {
       document.getElementById('noAllowed').style.display = 'none';
       document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
       globalOption = 'Bissecao';
+      break;
+    case 'FalsaPos':
+      document.getElementById('noAllowed').style.display = 'none';
+      document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
+      globalOption = 'FalsaPos';
       break;
 
     default:
@@ -78,15 +77,6 @@ input_calculate.addEventListener('click', () => {
   document.getElementById('container_iterations').style.display = 'block';
   document.getElementById('container_result').style.display = 'flex';
   
-  // Limpar as entradas para o gráfico
-  if (regexLnGraf.test(valueCloneGraf)) { // log(x)
-      valueCloneGraf = valueCloneGraf.replace(regexLnGraf, 'log')
-  }
-
-  if (regexLogGraf.test(valueCloneGraf)) { // log(x)
-      valueCloneGraf = valueCloneGraf.replace(regexLogGraf, 'log10');
-  }
-
   // Enviar gráfico
   try {
     drawGraphic();
