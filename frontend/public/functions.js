@@ -215,6 +215,94 @@ class Metodo {
             return arr;
         }
     }
+
+    Newton_Raphson() {
+        const arr = [
+            // {
+            //     x: ?,
+            //     fx: ?,
+            //     mod: ?
+            // }
+        ];
+        
+        const {funcao: auxExpressao, intervalo, tolerancia, iteracoesM: limite_iteracoes} = this.estrutura.opcoes;
+        const inicio_interv = Number(intervalo[0]);
+        // const fim_interv = Number(intervalo[2]);
+
+        const func = formStrMath(auxExpressao) // Função formatada, adicionei
+        const EI = inicio_interv // estimativa inicial
+        const T = tolerancia // tolerância
+        const LdI = limite_iteracoes // limite de iterações
+
+        // definindo a função e sua derivada
+        const f_parse = math.parse(func)
+        const d_parse = math.derivative(f_parse, math.parse('x'))
+        const f = f_parse.compile()
+        const d = d_parse.compile()
+
+        var x = EI
+        var fx = f.evaluate({x: x})
+        var dx = d.evaluate({x: x})
+        let k = 0 // contador de iterações
+
+        if(dx == 0){
+            if(math.abs(fx) <= T){
+                return x
+            }
+
+            console.log("não é possível calcular a raiz por esse método")
+        }
+        // print k = 0
+        console.log(`k: ${k}\n\tx = ${x}\n\tf(x) = ${fx}\n\tf´(x) = ${dx}`)
+
+        while(math.abs(fx) > T && k < LdI){
+            const x1 = x;
+
+            // nova iteração
+            k++
+            // novo valor de x
+            x -= fx/dx
+            
+            // computando novamente f(x) e f'(x)
+            fx = f.evaluate({x: x})
+            dx = d.evaluate({x: x})
+            // print do resultado
+            console.log(`k: ${k}\n\tx = ${x}\n\tf(x) = ${fx}\n\tf´(x) = ${dx}`)
+
+            // array resultado
+            arr.push(
+                {
+                        iterac: k,
+                        x: x,
+                        fx: fx,
+                        mod: x - x1
+                })
+            // finalizando o loop caso f'(x) = 0
+            if(dx == 0) break;
+        }
+
+        if(math.abs(fx) > T){
+            return 'err'
+        }
+
+        // resultado final
+        let str = '';
+        arr.forEach(({iterac, x, fx, mod}) => {
+            if (str.length > 0) {
+                if (isNaN(iterac) || isNaN(x) || isNaN(fx) || isNaN(mod)) {
+                    return 'err'
+                } else if (!isFinite(fx)) {
+                    return 'inf'
+                }
+            }
+        })
+
+        if (k === limite_iteracoes) {
+            return 'err'
+        } else {
+            return arr;
+        }
+    }
 }
 
 module.exports = { Metodo }

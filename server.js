@@ -20,9 +20,12 @@ app.post('/', (req, res) => { // Send result of iteration
             break;
         case 'FalsaPos':
             res.status(200).json({x: metodo.falsa_pos()});
+            break;
+        case 'NewtonRaph':
+            res.status(200).json({x: metodo.Newton_Raphson()});
+            break;
         }
-
-        console.log(metodo.bissecao());
+        // console.log(metodo.bissecao());
 
     } catch (error) {
         res.status(400);

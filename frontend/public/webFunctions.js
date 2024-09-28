@@ -58,6 +58,7 @@ export const drawGraphic = () => {
     let height = document.getElementById('container_graphic').clientHeight;
     
     let formatfunc = formStrGraph(input_func.value)
+    console.log(`Valor Recebido pelo gráfico: ${formatfunc}`);
 
     functionPlot({
         title: "Função: " + input_func.value,
@@ -76,11 +77,13 @@ export const drawGraphic = () => {
           }
         ]
       });
+      console.log(`Gráfico Desenhado`);
 }
 
 // Enviar dados para iteracao
 export const postEstrutura = async (obj, globalOption) => {
     const baseURL = "http://localhost:8080/";
+    console.log(`Envio dos dados para o backend...`);
     try {
         const res = await fetch(baseURL, 
         {
@@ -92,12 +95,13 @@ export const postEstrutura = async (obj, globalOption) => {
                 estrutura: obj
             })
         })
-        console.log('Requisição bem-sucedida');
         const data = await res.json();
-        console.log(data.x);
+        console.log(`Valor Recebido pelo backend: ${JSON.stringify(data.x)}`)
+        console.log('Requisição bem-sucedida, enviando nodes do resultado');
   
         switch (globalOption) {
           case 'Bissecao': 
+          document.getElementById('tipo_metodo').textContent = "Bisseção - Iteração";
           if (data.x === 'err') {
             document.querySelector('#container_iterations > span').innerHTML = '';
             document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
@@ -111,8 +115,10 @@ export const postEstrutura = async (obj, globalOption) => {
               document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', HTML);
             }) 
           }
+
             break;
           case 'FalsaPos':
+            document.getElementById('tipo_metodo').textContent = "Falsa Pos - Iteração";
             if (data.x === 'err') {
               document.querySelector('#container_iterations > span').innerHTML = '';
               document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
@@ -127,7 +133,26 @@ export const postEstrutura = async (obj, globalOption) => {
               }) 
             }
             break;
+
+            case 'NewtonRaph':
+              document.getElementById('tipo_metodo').textContent = "Newton - Iteração";
+              if (data.x === 'err') {
+                document.querySelector('#container_iterations > span').innerHTML = '';
+                document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!</div>`);
+              } else if (data.x === 'inf') {
+                document.querySelector('#container_iterations > span').innerHTML = '';
+                document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', `<div>Não Convergiu!!, INFINITO</div>`);
+              } else {
+                // console.log(data.x);
+                data.x.forEach(({iterac, x, fx, mod}) => {
+                  let HTML = `<div class="iterations"><span>x${iterac}</span> <span>${Number(x).toFixed(8)}</span> <span>${Number(fx).toFixed(8)}</span> <span>${Number(mod).toFixed(8)}</span></div>`;
+                  
+                  document.querySelector('#container_iterations > span').insertAdjacentHTML('afterbegin', HTML);
+                }) 
+              }
+              break
         }
+        console.log('Nodes enviados, função terminou');
     } catch (error) {
         document.getElementById('container_iterations').style.display = 'block';
         document.getElementById('container_result').style.display = 'flex';

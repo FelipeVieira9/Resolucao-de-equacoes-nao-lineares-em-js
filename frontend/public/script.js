@@ -27,6 +27,11 @@ methods_select.addEventListener('change', (e) => {
       document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
       globalOption = 'FalsaPos';
       break;
+    case 'NewtonRaph':
+      document.getElementById('noAllowed').style.display = 'none';
+      document.getElementById('input_deriv').setAttribute('placeholder', 'Opcional');
+      globalOption = 'NewtonRaph';
+      break;
 
     default:
       document.getElementById('input_deriv').setAttribute('placeholder', '');
