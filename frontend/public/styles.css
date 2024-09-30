@@ -74,10 +74,48 @@ main {
 }
 
 #container_input > span {
-    display: block;
-    margin: 0 auto;
-    width: fit-content;
+    display: flex;
     margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#history_svg {
+    margin-left: 10px;
+    fill: black;
+    cursor: pointer;
+    transition: transform;
+    transition-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+#history_svg:hover {
+    transform: rotate(-360deg);
+}
+
+#history_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#history_container:hover {
+    #history_itens {
+        display: block;
+    }
+}
+#history_itens {
+    display: none;
+    width: 300px;
+    
+    border: 1px solid black;
+    position: absolute;
+    left: 30px;
+    bottom: 20px;
+    background-color: white;
+    padding: 10px;
 }
 
 #container_result {

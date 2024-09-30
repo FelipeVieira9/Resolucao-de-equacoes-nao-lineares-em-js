@@ -96,6 +96,7 @@ export const postEstrutura = async (obj, globalOption) => {
             })
         })
         const data = await res.json();
+        
         console.log(`Valor Recebido pelo backend: ${JSON.stringify(data.x)}`)
         console.log('Requisição bem-sucedida, enviando nodes do resultado');
   
@@ -170,6 +171,10 @@ export const postEstrutura = async (obj, globalOption) => {
               }
               break;
         }
+        const {iterac, x, fx, mod, a, b} = data.x[data.x.length - 1];
+
+        let HTML = `<div id="iterations">${globalOption} - x${iterac} - [${Number(a).toFixed(3)}, ${Number(b).toFixed(3)}] = ${Number(x).toFixed(3)}</div><hr>`
+        document.querySelector('#history_itens').insertAdjacentHTML('beforeend', HTML);
         console.log('Nodes enviados, função terminou');
     } catch (error) {
         document.getElementById('container_iterations').style.display = 'block';

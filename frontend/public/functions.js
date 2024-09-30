@@ -54,7 +54,9 @@ class Metodo {
                     iterac: k,
                     x: x,
                     fx: f_x,
-                    mod: b - a
+                    mod: b - a,
+                    a: a,
+                    b: b
             }
         )
     
@@ -87,7 +89,9 @@ class Metodo {
                         iterac: k,
                         x: x,
                         fx: f_x,
-                        mod: b - a
+                        mod: b - a,
+                        a: a,
+                        b: b
                 })
         }
         // console.log(`k: ${k}\n\tf(${a}) = ${f_a}\n\tf(${b}) = ${f_b}\n\tf(${x}) = ${f_x}`)
@@ -158,7 +162,9 @@ class Metodo {
                     iterac: k,
                     x: x,
                     fx: f_x,
-                    mod: b - a
+                    mod: b - a,
+                    a: a,
+                    b: b
             }
         )
     
@@ -191,7 +197,9 @@ class Metodo {
                         iterac: k,
                         x: x,
                         fx: f_x,
-                        mod: b - a
+                        mod: b - a,
+                        a: a,
+                        b: b
                 })
         }
 
@@ -275,7 +283,9 @@ class Metodo {
                         iterac: k,
                         x: x,
                         fx: fx,
-                        mod: x - x1
+                        mod: x - x1,
+                        a: x,
+                        b: x1
                 })
             // finalizando o loop caso f'(x) = 0
             if(dx == 0) break;
@@ -344,7 +354,9 @@ class Metodo {
                     iterac: k,
                     x: x,
                     fx: fx,
-                    mod: x - a
+                    mod: x - a,
+                    a: x,
+                    b: a
             })
         
         var aux1, aux2;
@@ -364,7 +376,9 @@ class Metodo {
                             iterac: k,
                             x: x,
                             fx: fx,
-                            mod: x - a
+                            mod: x - a,
+                            a: x,
+                            b: a
                     })
             // print resultado
             console.log(`k = ${k}\n\tx${k+1} = ${x}\n\tf(x${k+1}) = ${fx}`)
