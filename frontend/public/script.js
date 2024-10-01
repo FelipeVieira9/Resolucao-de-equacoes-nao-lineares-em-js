@@ -1,5 +1,4 @@
 import { drawGraphic, postEstrutura } from "/assets/webFunctions.js";
-//import formStrGraph from "../../backend/formStrGraph.js";
 const input_func = document.getElementById('input_func');
 const input_deriv = document.getElementById('input_deriv');
 const input_interval = document.getElementById('input_interval');
