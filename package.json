@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.21.0",
-    "math-expression-evaluator": "^2.0.5",
     "mathjs": "^13.1.1"
   }
 }

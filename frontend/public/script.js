@@ -70,19 +70,9 @@ input_calculate.addEventListener('click', () => {
   try {
     drawGraphic();
   } catch (error) {
-    // document.getElementById('graphic').innerHTML = '';
+    
     document.getElementById('graphic').innerHTML = '<h3>Gráfico: Erro de sintaxe ou sem internet</h3>';
   }
-
-  // Guardar o resultado
-
-  // document.querySelector('#history_itens').innerHTML = '';
-
-  // historico.forEach(({iterac, x, fx, mod, a, b}) => {
-  //   let HTML = `<div class="iterations">${globalOption} - ${input_func} - [${a}, ${b}] = ${x}</div>`;
-  //   document.querySelector('#history_itens').insertAdjacentHTML('afterbegin', HTML);
-  // }) 
-  // Enviar para o historico
 
   // Limpar elementos options
   const nodeSpan = document.querySelectorAll('#method_options span');

@@ -1,5 +1,4 @@
 const express = require('express'); // To run localHost
-const Mexp = require('math-expression-evaluator'); // To evaluate math expressions
 const app = express();
 const port = 8080;
 const {Metodo} = require('./frontend/public/functions'); // functions
@@ -28,8 +27,6 @@ app.post('/', (req, res) => { // Send result of iteration
             res.status(200).json({x: metodo.Secante()})
             break;
         }
-        // console.log(metodo.bissecao());
-
     } catch (error) {
         res.status(400);
         console.log(error);
