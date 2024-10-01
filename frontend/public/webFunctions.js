@@ -57,10 +57,11 @@ export const drawGraphic = () => {
     let width = document.getElementById('container_graphic').clientWidth;
     let height = document.getElementById('container_graphic').clientHeight;
     
+    document.getElementById('graphic').innerHTML = '';
+
     let formatfunc = formStrGraph(input_func.value)
     console.log(`Valor Recebido pelo gráfico: ${formatfunc}`);
 
-    document.getElementById('graphic').innerHTML = '';
     functionPlot({
         title: "Função: " + input_func.value,
         target: "#graphic",
