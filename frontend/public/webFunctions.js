@@ -81,7 +81,7 @@ export const drawGraphic = () => {
 }
 
 // Enviar dados para iteracao
-export const postEstrutura = async (obj, globalOption) => {
+export const postEstrutura = async (obj, globalOption, func) => {
     const baseURL = "http://localhost:8080/";
     console.log(`Envio dos dados para o backend...`);
     try {
@@ -172,8 +172,8 @@ export const postEstrutura = async (obj, globalOption) => {
               break;
         }
         const {iterac, x, fx, mod, a, b} = data.x[data.x.length - 1];
-
-        let HTML = `<div id="iterations">${globalOption} - x${iterac} - [${Number(a).toFixed(3)}, ${Number(b).toFixed(3)}] = ${Number(x).toFixed(3)}</div><hr>`
+       
+        let HTML = `<div id="iterations">${globalOption} - (${func}) - [${Number(a).toFixed(3)}, ${Number(b).toFixed(3)}] = ${Number(x).toFixed(3)}</div><hr>`
         document.querySelector('#history_itens').insertAdjacentHTML('beforeend', HTML);
         console.log('Nodes enviados, função terminou');
     } catch (error) {

@@ -109,7 +109,8 @@ main {
 #history_itens {
     display: none;
     width: 300px;
-    
+    max-height: 100px;
+    overflow-y: auto;
     border: 1px solid black;
     position: absolute;
     left: 30px;

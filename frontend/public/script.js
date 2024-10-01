@@ -60,7 +60,8 @@ input_calculate.addEventListener('click', () => {
   }
 
   // Enviar os dado e enviar a iteração para tela
-  postEstrutura(estrutura, globalOption);
+  const func = input_func.value;
+  postEstrutura(estrutura, globalOption, func);
   
   // Liberar a visualização
   document.getElementById('container_iterations').style.display = 'block';
@@ -70,6 +71,7 @@ input_calculate.addEventListener('click', () => {
   try {
     drawGraphic();
   } catch (error) {
+    // document.getElementById('graphic').innerHTML = '';
     document.getElementById('graphic').innerHTML = '<h3>Gráfico: Erro de sintaxe ou sem internet</h3>';
   }
 
