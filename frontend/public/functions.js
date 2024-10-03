@@ -343,9 +343,6 @@ class Metodo {
         var fx = f.evaluate({x: x})
 
         console.log(`k = 0\n\tx0 = ${a}\n\tf(x0) = ${fa}\n\tx1 = ${x}\n\tf(x1) = ${fx}`)
-        // if(fa*fx > 0){
-        //     return 'err' REMOVI PQ TAVA DANDO ERROR LITERALMENTE
-        // }
 
         var k = 0;
 
